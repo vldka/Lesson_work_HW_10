@@ -14,11 +14,10 @@ public class SelenideTest {
 
     @Test
     @DisplayName("Проверка на чистом Selenide")
-    public void testIssueSearchTest() {
+    public void testIssueSearch() {
         SelenideLogger.addListener("allure", new AllureSelenide());
 
         open("https://github.com");
-
         $(".search-input").click();
         $("#query-builder-test").sendKeys(REPOSITORY);
         $("#query-builder-test").submit();
@@ -29,15 +28,15 @@ public class SelenideTest {
 
     @Test
     @DisplayName("Проверка по Steps Lambda")
-    public void testIssueSearchLambdaStepsTest() {
+    public void testIssueSearchLambdaSteps() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         step("Открываем главную страницу", () -> open("https://github.com"));
-        step("Поиск" + REPOSITORY, () -> {
+        step("Поиск " + REPOSITORY, () -> {
             $(".search-input").click();
             $("#query-builder-test").sendKeys(REPOSITORY);
             $("#query-builder-test").submit();
         });
-        step("Клик репозитория" + REPOSITORY, () -> $(linkText(REPOSITORY)).click());
+        step("Клик репозитория " + REPOSITORY, () -> $(linkText(REPOSITORY)).click());
         step("Проверяем наличие вкладки Issue", () -> {
             $("#issues-tab").shouldHave(text("Issues"));
         });
@@ -45,7 +44,7 @@ public class SelenideTest {
 
     @Test
     @DisplayName("Проверка по анотации @Steps")
-    public void testIssueSearchAnnotationStepsTest() {
+    public void testIssueSearchAnnotationSteps() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         WebSteps steps = new WebSteps();
 
